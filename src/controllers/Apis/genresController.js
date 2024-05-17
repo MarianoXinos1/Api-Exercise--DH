@@ -1,27 +1,24 @@
-const db = require('../../database/models');
+const genreService = require('../../database/Services/Apis/genresServices');
 
 const genresController = {
-    list: async function (req,res) {
-
-        try {
-            const genres= await db.Genre.findAll();
-            res.json(genres)
-        } catch (error){
-            console.log('Error al obtener generos Api',error);
-            res.status(500).send('Error al obtener generos Api');
+    list: async function (req, res) {
+        const result = await genreService.getAllGenres();
+        if (result.status === 200) {
+            res.json(result);
+        } else {
+            res.status(result.status).send(result.message);
         }
     },
 
-    detail: async function (req,res) {
-        try {
-            const genre = await db.Genre.findByPk(req.params.id);
-            res.json(genre);
-        } catch (error) {
-            console.log('Error al obtener detale Api');
-            res.status(500).send('Error al obtener detalle Api');  // Importante que el send vaya al final porque si va al inicio antes que status no se enviara el status.
+    detail: async function (req, res) {
+        const result = await genreService.getGenreById(req.params.id);
+        if (result.status === 200) {
+            res.json(result);
+        } else {
+            res.status(result.status).send(result.message); // Importante que el send vaya al final porque si va al inicio antes que status no se enviara el status.
+   
         }
     }
-
 }
 
-module.exports = genresController;
+module.exports = genresController;  
