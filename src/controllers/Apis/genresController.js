@@ -1,7 +1,7 @@
-const db = require('../database/models');
+const db = require('../../database/models');
 
 const genresController = {
-    'list': async function (req,res) {
+    list: async function (req,res) {
 
         try {
             const genres= await db.Genre.findAll();
@@ -12,7 +12,7 @@ const genresController = {
         }
     },
 
-    'detail': async function (req,res) {
+    detail: async function (req,res) {
         try {
             const genre = await db.Genre.findByPk(req.params.id);
             res.json(genre);
@@ -23,3 +23,5 @@ const genresController = {
     }
 
 }
+
+module.exports = genresController;
