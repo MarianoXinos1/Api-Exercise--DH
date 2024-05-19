@@ -7,9 +7,7 @@ const genresController = {
             const result = await genreService.getAllGenres();
             res.json(result);
         } catch (error) {
-            return res.status(500).json({
-                message: 'Error al obtener los géneros'
-            }); 
+            return res.status(500).json({ message: 'Error al obtener los géneros'}); 
         }
     },
     
@@ -19,9 +17,7 @@ const genresController = {
             const result = await genreService.getGenreById(req.params.id);
             res.json(result);
         } catch (error) {
-            return res.status(500).json({
-                message: 'Error al obtener el género'
-            }); 
+            return res.status(500).json({ message: 'Error al obtener el género'}); 
         }
     }
 }
