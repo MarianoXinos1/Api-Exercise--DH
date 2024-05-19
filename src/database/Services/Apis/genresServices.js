@@ -2,6 +2,7 @@
 const db = require('../../models');
 
 const genreService = {
+    
     getAllGenres: async function () {
         try {
             const genres = await db.Genre.findAll();
@@ -12,10 +13,7 @@ const genreService = {
             };
         } catch (error) {
             console.log('Error al obtener generos Api', error);
-            return {
-                status: 500,
-                message: 'Error al obtener generos Api'
-            };
+            return { status: 500 };
         }
     },
 
@@ -28,10 +26,7 @@ const genreService = {
             };
         } catch (error) {
             console.log('Error al obtener detalle Api');
-            return {
-                status: 500,
-                message: 'Error al obtener detalle Api'
-            };
+            return { status: 500 };
         }
     }
 }

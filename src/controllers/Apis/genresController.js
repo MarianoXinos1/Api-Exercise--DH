@@ -1,22 +1,27 @@
 const genreService = require('../../database/Services/Apis/genresServices');
 
 const genresController = {
+    
     list: async function (req, res) {
-        const result = await genreService.getAllGenres();
-        if (result.status === 200) {
+        try {
+            const result = await genreService.getAllGenres();
             res.json(result);
-        } else {
-            res.status(result.status).send(result.message);
+        } catch (error) {
+            return res.status(500).json({
+                message: 'Error al obtener los géneros'
+            }); 
         }
     },
+    
 
     detail: async function (req, res) {
-        const result = await genreService.getGenreById(req.params.id);
-        if (result.status === 200) {
+        try {
+            const result = await genreService.getGenreById(req.params.id);
             res.json(result);
-        } else {
-            res.status(result.status).send(result.message); // Importante que el send vaya al final porque si va al inicio antes que status no se enviara el status.
-   
+        } catch (error) {
+            return res.status(500).json({
+                message: 'Error al obtener el género'
+            }); 
         }
     }
 }
